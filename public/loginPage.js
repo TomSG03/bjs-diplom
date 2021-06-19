@@ -1,15 +1,22 @@
 'use strict'
-
+//Реализация страницы «Вход и регистрация»
 let netUser = new UserForm();
-netUser.loginFormCallback = (data) => ApiConnector.login(data, answer);
-netUser.registerFormCallback = (data) => ApiConnector.register(data, answer);
+netUser.loginFormCallback = (data) => ApiConnector.login(data, answerLogin);
+netUser.registerFormCallback = (data) => ApiConnector.register(data, answerRegistrator);
 
-function answer(result) {
-  console.log(result)
+function answerLogin(result) {
   if (result.success === true) {
     location.reload();
   } else {
-    alert(result.error);
+    netUser.setLoginErrorMessage(result.error);
+  }
+}
+
+function answerRegistrator(result) {
+  if (result.success === true) {
+    location.reload();
+  } else {
+    netUser.setRegisterErrorMessage(result.error);
   }
 }
 
